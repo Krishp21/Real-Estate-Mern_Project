@@ -20,8 +20,9 @@ const userSchema = new mongoose.Schema({
         default: "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png"
     }, 
 },
-{timestamps: true});
+{timestamps: true}
+);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema); //create a model from the schema
 
 export default User;
