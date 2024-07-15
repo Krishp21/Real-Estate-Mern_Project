@@ -7,6 +7,7 @@ import { error } from 'console';
 dotenv.config();
 
 // Connect to MongoDB
+
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Connected to MongoDB');
     }).catch((error) => {
