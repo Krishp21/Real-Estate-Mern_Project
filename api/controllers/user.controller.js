@@ -28,3 +28,14 @@ export const updateUserInfo = async (req, res, next) => {
 
    }
 };
+
+export const deleteUser = async (req, res, next) => {
+   if(req.user.id !== req.params.id) return next(errorHandler(401, "Only deleting your own account is allowed"));//user.id is from verified user from jwt
+   try{
+      await User.findByIdAndDelete(req.params.id); //delete user
+      res.clearCookie('access_token');
+      res.status(200).json ("User deleted");
+   } catch(error){
+      next(error);
+   }
+}
