@@ -5,13 +5,17 @@ import { useState, useEffect } from 'react'
 import { app } from '../firebase'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable,} from 'firebase/storage'
 //import getStorage from 'redux-persist/es/storage/getStorage'
+import { updateUserStart, updateUserFailure, updateUserSuccess } from '../redux/user/userSlice'
+import { useDispatch } from 'react-redux'
 const Profile = () => {
 const fileRef = useRef(null)
-const { currentUser } = useSelector((state) => state.user);
+const { currentUser , loading , error} = useSelector((state) => state.user);
 const [file, setFile] = useState(undefined)
 const [fileError, setFileError] = useState(false)
 const [filePercentage, setFilePercentage] = useState(0)
 const [formData, setFormData] = useState({})
+const dispatch = useDispatch()
+const [updateSuccess, setUpdateSuccess] = useState(false)
 // console.log(file);
 // console.log(formData);
 // console.log(filePercentage);
@@ -54,11 +58,38 @@ const [formData, setFormData] = useState({})
   );
 };
   
+const handleChange = (e) => {
+  setFormData({...formData, [e.target.id]: e.target.value})
+}
+const handleSubmit = async (e) => {
+  e.preventDefault();//prevent the default form submission
+  try{
+    dispatch(updateUserStart());
+    const res = await fetch(`/api/user/update/${currentUser._id}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
 
+    },
+    body: JSON.stringify(formData),
+   
+  });
+  const data = await res.json();
+  if(data.success === false){
+    dispatch(updateUserFailure(data.message));
+    return;
+    
+  }
+  dispatch(updateUserSuccess(data));
+  setUpdateSuccess(true);
+}catch(error){
+    dispatch(updateUserFailure(error.messsage))
+  }
+}
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-      <form className='flex flex-col gap-4'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input onChange={(e)=>setFile(e.target.files[0])} type="file" ref={fileRef} hidden accept='image/*'/> 
         <img onClick={()=>fileRef.current.click()} 
         src={formData.avatar || currentUser.avatar} //load the new image if uploaded
@@ -72,15 +103,17 @@ const [formData, setFormData] = useState({})
         : filePercentage === 100 ? (<span className='text-green-700'>Image uploaded successfully</span>) 
         :('')}
       </p>
-      <input type="text" placeholder='Enter username' className='border p-3 rounded-lg' id='username' value={currentUser.name} />
-      <input type="email" placeholder='Enter email' className='border p-3 rounded-lg' id='email' value={currentUser.name} />
-      <input type="password" placeholder='Enter password' className='border p-3 rounded-lg'  id='password' value={currentUser.name} />
-      <button className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>Update</button>
+      <input type="text" placeholder='Enter username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange} id='username' value={currentUser.name} />
+      <input type="email" placeholder='Enter email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange} id='email' value={currentUser.name} />
+      <input type="password" placeholder='Enter password' className='border p-3 rounded-lg'  id='password' onChange={handleChange} value={currentUser.name} />
+      <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>{loading ? 'Loading..' : 'Update'}</button>
       </form>
       <div className='flex justify-between mt-5'>
         <span className='text-red-700 cursor-pointer'>Delete Account</span>
         <span className='text-red-700 cursor-pointer'>Sign Out</span>
       </div>
+      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
+      <p className='text-green-700 mt-5'>{updateSuccess ? 'Profile updated successfully' : ''}</p>
     </div>
   )
 }
