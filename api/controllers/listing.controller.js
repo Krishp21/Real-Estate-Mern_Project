@@ -1,5 +1,6 @@
 import Listing from '../models/listing.model.js'
 import {errorHandler} from '../utils/error.js'
+
 export const createListing = async (req, res, next) => {
 try {
     const listing= await Listing.create(req.body); //create a new listing   
@@ -41,4 +42,15 @@ export const updateListing = async (req, res, next) => {
         next(error);
         
     }
+}
+
+export const getListing = async (req, res, next) => {
+try {
+    const listing= await Listing.findById(req.params.id); //find the listing by id
+    if(!listing) {return next(errorHandler(404, 'Listing not found'));} //if listing not found, return error
+    res.status(200).json(listing); //return the listing
+} catch (error) {
+    next(error);
+    
+}
 }

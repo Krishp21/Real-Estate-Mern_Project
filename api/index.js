@@ -30,9 +30,9 @@ app.listen(3000, () => {
 //     res.send('Hello World'); //can send JSON, HTML, etc.
 //     });
 
-app.use("/api/user",userRouter);
-app.use("/api/auth",authRouter);
-app.use("/api/listing",listingRouter);
+app.use('/api/user',userRouter);
+app.use('/api/auth',authRouter);
+app.use('/api/listing',listingRouter);
 
 app.use((error, req, res, next) => {    
     const statusCode = error.statusCode || 500; //default 500 (internal server error)
