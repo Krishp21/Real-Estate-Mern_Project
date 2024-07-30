@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO).then(() => {
     }).catch((error) => {
     console.log('Error:', error);
     });
-
+ 
 const app = express();
 
 app.use(express.json());
