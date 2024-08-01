@@ -102,8 +102,7 @@ export default function CreateListing() {
         e.preventDefault()
         try {
             if(formData.imageUrls.length < 1) return setError('Please upload at least one image');
-            if(+formData.regularPrice< +formData.discountPrice) 
-                return setError('Discounted price cannot be higher than the regular price');
+            if(+formData.regularPrice< +formData.discountPrice) return setError('Discounted price cannot be higher than the regular price');
                     
             
             setLoading(true);
@@ -115,8 +114,8 @@ export default function CreateListing() {
                 },
                 body: JSON.stringify({
                     ...formData,
-                    userRef: currentUser._id
-                })
+                    userRef: currentUser._id,
+                }),
             })
             const data = await res.json()
             setLoading(false)
