@@ -9,6 +9,6 @@ router.get('/test', test);
 router.post('/update/:id',verifyToken, updateUserInfo) //:id for dynamic route
 router.delete('/delete/:id',verifyToken, deleteUser) //:id for dynamic route
 router.get('/listings/:id', verifyToken, getUserListings)
-router.get('/:id',verifyToken, geUser)
+router.get('/:id',verifyToken, getUser)
 
 export default router;
