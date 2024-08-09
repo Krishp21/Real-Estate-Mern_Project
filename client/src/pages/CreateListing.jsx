@@ -1,8 +1,8 @@
-import React from 'react'
+
 import { useState } from 'react'
 import { getStorage, getDownloadURL, ref, uploadBytesResumable, } from 'firebase/storage'
 import { app } from '../firebase'
-import { set } from 'mongoose'
+//import { set } from 'mongoose'
 import {useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -89,13 +89,13 @@ export default function CreateListing() {
     }
     const handleChange = (e) => {
         if(e.target.id === 'sale' || e.target.id === 'rent'){
-            setFormData({...formData, type: e.target.id})
+            setFormData({...formData, type: e.target.id,})
         }
         if(e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer'){
-            setFormData({...formData, [e.target.id]: e.target.checked}) //set the value of the checkbox to the checked property
+            setFormData({...formData, [e.target.id]: e.target.checked,}) //set the value of the checkbox to the checked property
         }
         if(e.target.type==='number' || e.target.type==='text' || e.target.type==='textarea'){
-            setFormData({...formData, [e.target.id]: e.target.value}) //bracket [] for variable 
+            setFormData({...formData, [e.target.id]: e.target.value,}) //bracket [] for variable 
         }
     }
     const handleSubmit = async (e) => {
@@ -107,7 +107,7 @@ export default function CreateListing() {
             
             setLoading(true);
             setError(false);
-            const res = await fetch('/api/listing/create',{
+            const res = await fetch('/api/listing/create', {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export default function CreateListing() {
                 setError(data.message)
                 
             }
-            navigate(`/listing/${data._id}`)
+            navigate(`/listing/${data._id}`);
         } catch (error) {
             setError(error.message)
             setLoading(false)

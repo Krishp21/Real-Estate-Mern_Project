@@ -69,9 +69,9 @@ const listingSchema = new mongoose.Schema({
         required: true,
     },
     },
-    {                   //Save the timestamps of the creation and updation of the listing
-        timestamps: true,
-    }
+                      //Save the timestamps of the creation and updation of the listing
+        {timestamps: true},
+    
 
 )
 
