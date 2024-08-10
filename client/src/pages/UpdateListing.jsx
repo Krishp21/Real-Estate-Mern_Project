@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { getStorage, getDownloadURL, ref, uploadBytesResumable, } from 'firebase/storage'
 import { app } from '../firebase'
-import { set } from 'mongoose'
+//import { set } from 'mongoose'
 import {useSelector} from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 

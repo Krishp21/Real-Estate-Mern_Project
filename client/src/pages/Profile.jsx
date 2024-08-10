@@ -116,7 +116,6 @@ const Profile = () => {
         setShowListingsError(true);
         return;
       }
-
       setUserListings(data);
     } catch (error) {
       setShowListingsError(true);
@@ -195,7 +194,7 @@ const Profile = () => {
         Show Listings
       </button>
       <p className='text-red-700 mt-5'>
-        {showListingsError ? 'Error showing listings' : ''}
+        {showListingsError ? 'Error in showing listings' : ''}
       </p>
 
       {userListings &&
@@ -222,8 +221,9 @@ const Profile = () => {
               </Link>
 
               <div className='flex flex-col item-center'>
-                <button className='text-red-700 uppercase'>Delete</button>
-                <button className='text-green-700 uppercase'>Edit</button>
+                <button  onClick={()=>handleListingDelete(listing._id)} className='text-red-700 uppercase'>Delete</button>
+                <Link to= {`/update-listing/${listing._id}`}>
+                <button className='text-green-700 uppercase'>Edit</button></Link>
               </div>
             </div>
           ))}
