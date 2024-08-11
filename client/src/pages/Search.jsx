@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Listingitem from '../components/Listingitem.jsx';
+import ListingItem from '../components/Listingitem.jsx';
 //import { set } from 'mongoose';
 
 export default function Search() {
@@ -212,7 +212,7 @@ export default function Search() {
                         </p>
                     )}
 
-                    {!loading && listings && listings.map((listing) => (<Listingitem key={listing._id} listing= {listing}/>))}
+                    {!loading && listings && listings.map((listing) => (<ListingItem key={listing._id} listing= {listing}/>))}
 
                     {showMore && (
                         <button onClick={onShowMoreClick}
