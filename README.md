@@ -1,46 +1,72 @@
-This project is a comprehensive full stack real estate marketplace website developed using the MERN stack (MongoDB, Express, React, and Node.js). The platform allows users to list and browse property options, ensuring seamless interaction through a responsive and user-friendly interface.
+# Real Estate Marketplace
 
-Features:
-Property Listings and Browsing: Users can list their properties and browse through various property options available on the platform.
-User Authentication: Robust authentication mechanisms including traditional sign-in and sign-up pages as well as Google OAuth integration for easy access.
-Security: Enhanced security through salting and hashing for password storage, ensuring user data protection and integrity.
-Profile Management: Users can upload and manage their profile photos, providing a personalized experience.
-RESTful API: The API design follows RESTful principles, promoting scalable and maintainable code.
+This project is a full-stack real estate marketplace web application built using the MERN stack (MongoDB, Express, React, and Node.js). The platform allows users to buy, sell, and rent properties, providing features such as user authentication, property listings, and profile management. The application is designed with a responsive and user-friendly interface, making it easy for users to navigate and interact with the platform.
 
-Technologies Used:
-1. MongoDB: Database to store user and property information.
-2. Express: Backend framework to handle server-side logic.
-3. React: Frontend library to build a responsive user interface.
-4. Node.js: Runtime environment to execute server-side JavaScript.
+## Project Description
 
-Installation:
-To run this project locally, follow these steps:
+The Real Estate Marketplace project includes the following key features:
 
-Clone the repository:
+- **User Authentication:** Secure user authentication with traditional sign-in/sign-up and Google OAuth integration using Firebase. Passwords are stored securely with salting and hashing.
+- **Property Listings:** Users can browse, add, update, and delete property listings. Listings include images, descriptions, prices, and contact details.
+- **Profile Management:** Users can create and manage their profiles, including uploading profile photos.
+- **Responsive Design:** The application is fully responsive, ensuring a seamless experience on both desktop and mobile devices.
 
+## Installation Instructions
 
-`git clone https://github.com/Krishp21/real-estate-marketplace.git`
+Follow these steps to set up the project locally:
 
-`cd Real-Estate-Mern_Project`
+1. **Clone the repository:**
 
-Install dependencies:
+   Open your terminal and run:
 
-`npm install express mongoose bcryptjs jsonwebtoken config express-validator cors nodemailer`
+   ```bash
+   git clone https://github.com/Krishp21/Real-Estate-Mern_Project.git
+   cd Real-Estate-Mern_Project
+   ```
+2. **Set up the backend (Node.js/Express):**
 
-Set up environment variables:
-Create a .env file in the root directory and add the following:
+    Navigate to the backend directory:
 
-env
+    ```bash
+    cd backend
+    ```
 
-`MONGO_URI=your_mongo_database_uri`
-`JWT_SECRET=your_jwt_secret`
-`GOOGLE_CLIENT_ID=your_google_client_id`
-`GOOGLE_CLIENT_SECRET=your_google_client_secret`
-`EMAIL_SERVICE=your_email_service`
-`EMAIL_USER=your_email_user`
-`EMAIL_PASS=your_email_password`
+3. **Install the required dependencies:**
 
-Run the application:
-`npm run dev`
+    ```bash
+    npm install
+    ```
+4. **Create a .env file in the backend directory and add your environment variables (e.g., MongoDB connection string, Firebase credentials):**
+    ```
+    MONGO_URI=your_mongodb_connection_string
+    FIREBASE_API_KEY=your_firebase_api_key
+    FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+    FIREBASE_PROJECT_ID=your_firebase_project_id
+    FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+    FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+    FIREBASE_APP_ID=your_firebase_app_id
+    ```
 
+5. **Start the backend server:**
+
+    ```bash
+    npm run server
+    ```
+6. **Set up the frontend (React):**
+
+    Open a new terminal window/tab and navigate to the frontend directory:
+    ```
+    bash
+    cd ../frontend
+    ```
+
+7. **Install the required dependencies:**
+    ```bash
+    npm install
+    ```
+8. **Start the frontend development server:**
+
+    ```bash
+    npm start
+    ```
 
